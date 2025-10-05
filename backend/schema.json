@@ -1,0 +1,358 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "PlaylistSpec",
+    "description": "Schema for mood-to-playlist specification used between mood_to_playlist.py and spotify_client.py",
+    "type": "object",
+    "version": "1.0.0",
+    "required": [
+      "version",
+      "genres",
+      "mood_descriptors",
+      "audio_features",
+      "constraints",
+      "metadata"
+    ],
+    "properties": {
+      "version": {
+        "type": "string",
+        "enum": ["1.0.0"],
+        "description": "Schema version for compatibility checking"
+      },
+      "genres": {
+        "type": "array",
+        "description": "Spotify-compatible genre keywords, ordered by relevance",
+        "minItems": 1,
+        "maxItems": 5,
+        "items": {
+          "type": "string",
+          "enum": [
+            "acoustic", "afrobeat", "alt-rock", "alternative", "ambient",
+            "blues", "bossanova", "brazil", "breakbeat", "british",
+            "chill", "classical", "club", "country",
+            "dance", "deep-house", "disco", "drum-and-bass", "dub", "dubstep",
+            "edm", "electronic", "emo",
+            "folk", "funk", "garage", "gospel", "groove", "grunge",
+            "hip-hop", "house",
+            "indie", "indie-pop", "industrial",
+            "jazz", "k-pop", "kids", "latin", "lo-fi",
+            "metal", "minimal-techno",
+            "new-age",
+            "opera",
+            "party", "pop", "pop-film", "post-dubstep", "power-pop", "progressive-house", "psych-rock", "punk", "punk-rock",
+            "r-n-b", "rainy-day", "reggae", "reggaeton", "rock", "rock-n-roll", "rockabilly", "romance",
+            "salsa", "samba", "singer-songwriter", "ska", "sleep", "soul", "soundtracks", "study", "summer", "synth-pop",
+            "tango", "techno", "trance", "trap", "trip-hop",
+            "work-out", "world-music"
+          ]
+        },
+        "uniqueItems": true
+      },
+      "mood_descriptors": {
+        "type": "array",
+        "description": "Descriptive mood keywords for context",
+        "minItems": 2,
+        "maxItems": 5,
+        "items": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 50
+        },
+        "uniqueItems": true,
+        "examples": ["energetic", "melancholic", "focused", "uplifting", "relaxed"]
+      },
+      "audio_features": {
+        "type": "object",
+        "description": "Spotify audio feature target ranges",
+        "required": [
+          "energy",
+          "valence",
+          "danceability",
+          "acousticness",
+          "instrumentalness",
+          "tempo_bpm"
+        ],
+        "properties": {
+          "energy": {
+            "type": "array",
+            "description": "Perceptual intensity and activity (0.0=low, 1.0=high)",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": [
+              {
+                "type": "number",
+                "minimum": 0.0,
+                "maximum": 1.0,
+                "multipleOf": 0.05
+              },
+              {
+                "type": "number",
+                "minimum": 0.0,
+                "maximum": 1.0,
+                "multipleOf": 0.05
+              }
+            ]
+          },
+          "valence": {
+            "type": "array",
+            "description": "Musical positiveness/happiness (0.0=sad, 1.0=happy)",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": [
+              {
+                "type": "number",
+                "minimum": 0.0,
+                "maximum": 1.0,
+                "multipleOf": 0.05
+              },
+              {
+                "type": "number",
+                "minimum": 0.0,
+                "maximum": 1.0,
+                "multipleOf": 0.05
+              }
+            ]
+          },
+          "danceability": {
+            "type": "array",
+            "description": "Suitability for dancing (0.0=low, 1.0=high)",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": [
+              {
+                "type": "number",
+                "minimum": 0.0,
+                "maximum": 1.0,
+                "multipleOf": 0.05
+              },
+              {
+                "type": "number",
+                "minimum": 0.0,
+                "maximum": 1.0,
+                "multipleOf": 0.05
+              }
+            ]
+          },
+          "acousticness": {
+            "type": "array",
+            "description": "Confidence track is acoustic (0.0=electronic, 1.0=acoustic)",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": [
+              {
+                "type": "number",
+                "minimum": 0.0,
+                "maximum": 1.0,
+                "multipleOf": 0.05
+              },
+              {
+                "type": "number",
+                "minimum": 0.0,
+                "maximum": 1.0,
+                "multipleOf": 0.05
+              }
+            ]
+          },
+          "instrumentalness": {
+            "type": "array",
+            "description": "Predicts no vocals (0.0=vocals, 1.0=instrumental)",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": [
+              {
+                "type": "number",
+                "minimum": 0.0,
+                "maximum": 1.0,
+                "multipleOf": 0.05
+              },
+              {
+                "type": "number",
+                "minimum": 0.0,
+                "maximum": 1.0,
+                "multipleOf": 0.05
+              }
+            ]
+          },
+          "tempo_bpm": {
+            "type": "array",
+            "description": "Beats per minute range",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": [
+              {
+                "type": "integer",
+                "minimum": 50,
+                "maximum": 200
+              },
+              {
+                "type": "integer",
+                "minimum": 50,
+                "maximum": 200
+              }
+            ]
+          },
+          "speechiness": {
+            "type": "array",
+            "description": "Presence of spoken words (0.0=music, 1.0=speech) - OPTIONAL",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": [
+              {
+                "type": "number",
+                "minimum": 0.0,
+                "maximum": 1.0,
+                "multipleOf": 0.05
+              },
+              {
+                "type": "number",
+                "minimum": 0.0,
+                "maximum": 1.0,
+                "multipleOf": 0.05
+              }
+            ]
+          },
+          "liveness": {
+            "type": "array",
+            "description": "Audience presence in recording (0.0=studio, 1.0=live) - OPTIONAL",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": [
+              {
+                "type": "number",
+                "minimum": 0.0,
+                "maximum": 1.0,
+                "multipleOf": 0.05
+              },
+              {
+                "type": "number",
+                "minimum": 0.0,
+                "maximum": 1.0,
+                "multipleOf": 0.05
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "constraints": {
+        "type": "object",
+        "description": "Filtering constraints for track selection",
+        "required": ["avoid_explicit"],
+        "properties": {
+          "avoid_explicit": {
+            "type": "boolean",
+            "description": "Filter out explicit content",
+            "default": false
+          },
+          "release_year_range": {
+            "type": "array",
+            "description": "Year range for track release dates [min_year, max_year]",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": [
+              {
+                "type": "integer",
+                "minimum": 1900,
+                "maximum": 2030
+              },
+              {
+                "type": "integer",
+                "minimum": 1900,
+                "maximum": 2030
+              }
+            ]
+          },
+          "popularity_min": {
+            "type": "integer",
+            "description": "Minimum popularity score (0-100)",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "max_track_duration_ms": {
+            "type": "integer",
+            "description": "Maximum track duration in milliseconds",
+            "minimum": 30000,
+            "maximum": 1200000,
+            "default": 600000
+          }
+        },
+        "additionalProperties": false
+      },
+      "metadata": {
+        "type": "object",
+        "description": "Additional context and processing information",
+        "required": [
+          "interpretation_confidence",
+          "suggested_playlist_name",
+          "mood_summary"
+        ],
+        "properties": {
+          "interpretation_confidence": {
+            "type": "number",
+            "description": "Confidence score of mood interpretation (0.0=low, 1.0=high)",
+            "minimum": 0.0,
+            "maximum": 1.0,
+            "multipleOf": 0.05
+          },
+          "suggested_playlist_name": {
+            "type": "string",
+            "description": "Creative playlist name based on mood",
+            "minLength": 3,
+            "maxLength": 100,
+            "examples": ["Midnight Study Session", "Morning Motivation Mix", "Rainy Day Reflections"]
+          },
+          "mood_summary": {
+            "type": "string",
+            "description": "Brief description of interpreted mood",
+            "minLength": 20,
+            "maxLength": 200
+          },
+          "processing_notes": {
+            "type": "string",
+            "description": "Notes about processing decisions, clamping, or fallbacks",
+            "maxLength": 500
+          },
+          "fallback_used": {
+            "type": "boolean",
+            "description": "Whether deterministic fallback was used instead of LLM",
+            "default": false
+          },
+          "genres_normalized_count": {
+            "type": "integer",
+            "description": "Number of genres that required normalization",
+            "minimum": 0
+          },
+          "source_length": {
+            "type": "integer",
+            "description": "Character count of original mood text",
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "additionalProperties": false,
+    "examples": [
+      {
+        "version": "1.0.0",
+        "genres": ["lo-fi", "ambient", "chill"],
+        "mood_descriptors": ["focused", "calm", "studious"],
+        "audio_features": {
+          "energy": [0.2, 0.4],
+          "valence": [0.4, 0.6],
+          "danceability": [0.3, 0.5],
+          "acousticness": [0.5, 0.9],
+          "instrumentalness": [0.6, 1.0],
+          "tempo_bpm": [70, 100]
+        },
+        "constraints": {
+          "avoid_explicit": true
+        },
+        "metadata": {
+          "interpretation_confidence": 0.9,
+          "suggested_playlist_name": "Late Night Study Flow",
+          "mood_summary": "Calm, focused atmosphere perfect for studying with minimal distractions",
+          "processing_notes": "Clear study context with preference for instrumental tracks"
+        }
+      }
+    ]
+  }
