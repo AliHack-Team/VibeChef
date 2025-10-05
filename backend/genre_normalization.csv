@@ -1,0 +1,334 @@
+input_genre,normalized_genre
+# Spelling variations
+hiphop,hip-hop
+hip hop,hip-hop
+rnb,r-n-b
+r&b,r-n-b
+randb,r-n-b
+rhythm and blues,r-n-b
+dubstep,dub
+dub step,dub
+electro,electronic
+electronica,electronic
+psych,psychedelic
+psychadelic,psychedelic
+psychedelic rock,psych-rock
+prog,progressive-house
+prog rock,progressive-rock
+prog house,progressive-house
+punk rock,punk
+punkrock,punk
+hardrock,hard-rock
+soft rock,rock
+classic rock,classic-rock
+glam rock,glam-rock
+
+# Abbreviations
+edm,electronic
+dnb,drum-and-bass
+d&b,drum-and-bass
+idm,electronic
+ebm,electronic
+r n b,r-n-b
+kpop,k-pop
+jpop,j-pop
+jrock,j-rock
+lofi,lo-fi
+hifi,electronic
+synthwave,synth-pop
+retrowave,synth-pop
+darkwave,goth
+coldwave,post-punk
+shoegaze,indie
+dream pop,indie
+slowcore,indie
+
+# Regional differences
+grime,hip-hop
+drill,hip-hop
+uk drill,hip-hop
+trap,hip-hop
+southern rap,hip-hop
+west coast rap,hip-hop
+east coast rap,hip-hop
+crunk,hip-hop
+bounce,hip-hop
+hyphy,hip-hop
+g-funk,funk
+gangsta rap,hip-hop
+conscious rap,hip-hop
+mumble rap,hip-hop
+soundcloud rap,hip-hop
+emo rap,emo
+britpop,british
+brit pop,british
+uk garage,garage
+2-step,garage
+future garage,electronic
+bassline,electronic
+jungle,drum-and-bass
+liquid dnb,drum-and-bass
+neurofunk,drum-and-bass
+jump up,drum-and-bass
+ragga jungle,drum-and-bass
+darkstep,drum-and-bass
+technoid,techno
+detroit techno,techno
+berlin techno,techno
+dub techno,techno
+minimal techno,minimal
+microhouse,minimal
+
+# Non-Spotify genres mapped to closest equivalents
+vaporwave,electronic
+chillhop,lo-fi
+chillwave,chill
+future funk,funk
+synthwave,synth-pop
+outrun,electronic
+nightcore,electronic
+witch house,electronic
+seapunk,electronic
+cloud rap,hip-hop
+phonk,hip-hop
+drill n bass,drum-and-bass
+breakcore,breakbeat
+digital hardcore,hardcore
+speedcore,hardcore
+terrorcore,hardcore
+extratone,electronic
+lowercase,ambient
+onkyokei,experimental
+musique concrete,experimental
+electroacoustic,electronic
+acousmatic,experimental
+plunderphonics,experimental
+hauntology,electronic
+hypnagogic pop,indie
+chillstep,chill
+future bass,electronic
+kawaii future bass,electronic
+riddim,dubstep
+brostep,dubstep
+post-dubstep,electronic
+wonky,electronic
+purple sound,electronic
+footwork,electronic
+juke,electronic
+baltimore club,club
+jersey club,club
+philly club,club
+miami bass,hip-hop
+electro swing,electronic
+electroswing,electronic
+glitch hop,electronic
+glitchhop,electronic
+moombahton,reggaeton
+moombahcore,electronic
+complextro,electronic
+big room,edm
+festival trap,edm
+future house,house
+tropical house,house
+slap house,house
+brazilian bass,latin
+baile funk,funk
+funk carioca,funk
+kuduro,afrobeat
+kizomba,afrobeat
+afrobeats,afrobeat
+afrotrap,afrobeat
+amapiano,house
+gqom,electronic
+sgija,electronic
+bacardi,electronic
+
+# Compound genres (split into multiple)
+indie-folk,indie
+indie-rock,indie
+indie-pop,indie
+folk-rock,folk
+folk-pop,folk
+pop-rock,pop
+pop-punk,pop-punk
+punk-rock,punk
+post-rock,post-rock
+post-punk,post-punk
+post-hardcore,post-hardcore
+math-rock,math-rock
+prog-rock,progressive-rock
+psych-rock,psych-rock
+stoner-rock,rock
+doom-metal,metal
+death-metal,death-metal
+black-metal,black-metal
+thrash-metal,metal
+power-metal,power-metal
+folk-metal,metal
+symphonic-metal,metal
+melodic-death-metal,death-metal
+technical-death-metal,death-metal
+brutal-death-metal,death-metal
+slam-death-metal,death-metal
+deathcore,metalcore
+mathcore,metalcore
+electronicore,metalcore
+trancecore,metalcore
+progressive-metalcore,metalcore
+melodic-metalcore,metalcore
+christian-metalcore,metalcore
+nu-metal,metal
+nu metal,metal
+alt-metal,alternative
+alternative-metal,alternative
+industrial-metal,industrial
+cyber-metal,industrial
+dark-ambient,ambient
+ambient-techno,ambient
+ambient-house,ambient
+ambient-dub,ambient
+space-ambient,ambient
+psybient,ambient
+psychedelic-trance,psytrance
+goa-trance,trance
+uplifting-trance,trance
+tech-trance,trance
+hard-trance,trance
+acid-trance,trance
+progressive-trance,trance
+vocal-trance,trance
+dream-trance,trance
+euro-trance,trance
+hands-up,dance
+happy-hardcore,happy
+uk-hardcore,hardcore
+gabber,hardcore
+frenchcore,hardcore
+uptempo-hardcore,hardcore
+industrial-hardcore,hardcore
+crossbreed,hardcore
+darkcore,hardcore
+breakbeat-hardcore,breakbeat
+old-skool,breakbeat
+nu-skool,breakbeat
+big-beat,breakbeat
+broken-beat,breakbeat
+trip-hop,trip-hop
+downtempo,chill
+midtempo,electronic
+electro-house,house
+tech-house,tech-house
+deep-house,deep-house
+progressive-house,progressive-house
+acid-house,house
+chicago-house,house
+detroit-house,house
+french-house,house
+funky-house,house
+latin-house,latin
+afro-house,afrobeat
+tribal-house,house
+minimal-house,minimal
+micro-house,minimal
+dub-techno,techno
+minimal-techno,minimal
+acid-techno,techno
+hard-techno,techno
+industrial-techno,techno
+melodic-techno,techno
+peak-time-techno,techno
+raw-techno,techno
+hypnotic-techno,techno
+
+# Alternative names and variations
+chamber pop,indie
+bedroom pop,indie
+college rock,indie
+noise rock,rock
+noise pop,indie
+art rock,rock
+art pop,pop
+experimental rock,rock
+avant-garde,experimental
+free jazz,jazz
+bebop,jazz
+hard bop,jazz
+cool jazz,jazz
+smooth jazz,jazz
+jazz fusion,jazz
+jazz-funk,funk
+acid jazz,jazz
+nu jazz,jazz
+electro jazz,jazz
+future jazz,jazz
+spiritual jazz,jazz
+ethio-jazz,jazz
+latin jazz,latin
+bossa nova,bossanova
+brazilian,brazil
+mpb,brazil
+sertanejo,brazil
+forro,brazil
+pagode,brazil
+axe,brazil
+tecnobrega,brazil
+cumbia,latin
+reggaeton,reggaeton
+dembow,reggaeton
+perreo,reggaeton
+neoperreo,reggaeton
+guaracha,latin
+merengue,latin
+bachata,latin
+salsa,salsa
+mambo,latin
+cha-cha,latin
+rumba,latin
+son cubano,latin
+timba,latin
+nueva trova,latin
+vallenato,latin
+ranchera,latin
+mariachi,latin
+banda,latin
+corrido,latin
+norteno,latin
+tejano,latin
+conjunto,latin
+
+# Additional common variations
+dance music,dance
+dance pop,dance
+electronic dance music,edm
+intelligent dance music,idm
+new wave,new-wave
+no wave,punk
+dark wave,goth
+cold wave,post-punk
+minimal wave,minimal
+synth wave,synth-pop
+future pop,pop
+bubblegum pop,pop
+teen pop,pop
+adult contemporary,pop
+soft adult contemporary,pop
+modern rock,rock
+alternative rock,alternative
+indie alternative,indie
+underground,indie
+experimental pop,experimental
+avant pop,experimental
+outsider,experimental
+freak folk,folk
+new weird america,folk
+anti-folk,folk
+neofolk,folk
+dark folk,folk
+apocalyptic folk,folk
+murder ballads,folk
+traditional,folk
+world music,world
+global,world
+ethnic,world
+fusion,world
+crossover,pop
