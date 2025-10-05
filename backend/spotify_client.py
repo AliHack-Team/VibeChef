@@ -1,15 +1,15 @@
 import os
 import time
 from typing import List, Dict, Optional, Any
-import spotipy
-from spotipy.oauth2 import SpotifyOAuth
-from dotenv import load_dotenv
+import spotipy  # type: ignore
+from spotipy.oauth2 import SpotifyOAuth  # type: ignore
+from dotenv import load_dotenv  # type: ignore
 
 load_dotenv()
 
 
 class SpotifyClient:
-    def __init__(self):
+    def __init__(self) -> None:
         self.scope = "playlist-modify-public playlist-modify-private user-read-private"
         self.sp = None
         self.auth_manager = None
@@ -60,10 +60,14 @@ class SpotifyClient:
 
     def get_auth_url(self) -> Any:
         """Get the URL for user to authorize"""
+        if not self.auth_manager:
+            raise RuntimeError("Spotify auth manager not initialized")
         return self.auth_manager.get_authorize_url()
 
     def handle_callback(self, code: str) -> None:
         """Handle the callback from Spotify"""
+        if not self.auth_manager:
+            raise RuntimeError("Spotify auth manager not initialized")
         self.auth_manager.get_access_token(code)
         self.sp = spotipy.Spotify(auth_manager=self.auth_manager)
 
@@ -73,21 +77,35 @@ class SpotifyClient:
         Main function: Convert playlist spec to actual tracks
         Returns: List of track objects with all metadata
         """
-        tracks = []
+        tracks: List[Dict[str, Any]] = []
 
-        # Extract from spec (this comes from Developer 2)
+        # Extract from spec (supports Dev2 PlaylistSpec and legacy flat)
         genres = playlist_spec.get('genres', ['pop'])
-        energy = playlist_spec.get('energy', 0.5)
-        valence = playlist_spec.get('valence', 0.5)  # happiness
-        avoid_explicit = playlist_spec.get('avoid_explicit', False)
+        audio = playlist_spec.get('audio_features') or {}
+        constraints = playlist_spec.get('constraints') or {}
+        # Use midpoints for target features
+        def mid(v: Any, default: float) -> float:
+            try:
+                if isinstance(v, (list, tuple)) and len(v) == 2:
+                    return (float(v[0]) + float(v[1])) / 2.0
+                return float(v)
+            except Exception:
+                return default
+        energy = mid(audio.get('energy', playlist_spec.get('energy', 0.5)), 0.5)
+        valence = mid(audio.get('valence', playlist_spec.get('valence', 0.5)), 0.5)
+        avoid_explicit = bool(constraints.get('avoid_explicit', playlist_spec.get('avoid_explicit', False)))
+        # Keywords fallback from mood descriptors
+        keywords = playlist_spec.get('mood_descriptors') or playlist_spec.get('keywords') or []
 
         # Print for debugging
         print(f"Searching with genres: {genres}, energy: {energy}, valence: {valence}")
 
         try:
             # Layer 1: Get recommendations based on genres and features
+            if not self.sp:
+                raise RuntimeError("Spotify client not initialized")
             recommendations = self.sp.recommendations(
-                seed_genres=genres[:5],  # Max 5 genres
+                seed_genres=[g for g in genres if isinstance(g, str)][:5],  # Max 5 genres
                 target_energy=energy,
                 target_valence=valence,
                 limit=min(target_count * 2, 100)  # Get extra to filter
@@ -117,7 +135,8 @@ class SpotifyClient:
 
             # Layer 2: If not enough tracks, do keyword search
             if len(tracks) < target_count:
-                keywords = playlist_spec.get('keywords', ['happy', 'chill'])
+                if not keywords:
+                    keywords = ['happy', 'chill']
                 print(f"Need more tracks, searching keywords: {keywords}")
 
                 for keyword in keywords:
@@ -149,8 +168,8 @@ class SpotifyClient:
                         if len(tracks) >= target_count:
                             break
 
-                    if len(tracks) >= target_count:
-                        break
+                if len(tracks) >= target_count:
+                    pass
 
             print(f"Found {len(tracks)} tracks")
             return tracks[:target_count]
@@ -159,7 +178,7 @@ class SpotifyClient:
             print(f"Error searching tracks: {e}")
             return tracks  # Return what we have
 
-    def create_playlist(self, name: str, description: str, tracks: List[Dict],
+    def create_playlist(self, name: str, description: str, tracks: List[Dict[str, Any]],
                        public: bool = True) -> Optional[Dict[str, Any]]:
         """
         Create a Spotify playlist and add tracks
@@ -167,6 +186,8 @@ class SpotifyClient:
         """
         try:
             # Get user ID
+            if not self.sp:
+                raise RuntimeError("Spotify client not initialized")
             user = self.sp.current_user()
             user_id = user['id']
 
@@ -197,9 +218,11 @@ class SpotifyClient:
             print(f"Error creating playlist: {e}")
             return None
 
-    def get_user_profile(self) -> Optional[Dict]:
+    def get_user_profile(self) -> Optional[Dict[str, Any]]:
         """Get current user profile"""
         try:
+            if not self.sp:
+                raise RuntimeError("Spotify client not initialized")
             return self.sp.current_user()
         except Exception as e:
             print(f"Error getting user profile: {e}")
